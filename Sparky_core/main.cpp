@@ -43,7 +43,7 @@ int main() {
 	}
 
 	glActiveTexture(GL_TEXTURE0);
-	Texture texture("test1.png");
+	Texture texture("test.png");
 	texture.bind();
 
 	s1->enable();

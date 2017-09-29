@@ -184,6 +184,10 @@
     <None Include="src\shader\basic.frag" />
     <None Include="src\shader\basic.vert" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="test.png" />
+    <Image Include="test1.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
