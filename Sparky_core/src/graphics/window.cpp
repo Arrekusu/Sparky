@@ -81,6 +81,12 @@ namespace sparky {	namespace graphics {
 			std::cout << "Failed to initialize GLEW!!" << std::endl;
 			return false;
 		}
+
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
+		std::cout << glGetString(GL_VERSION) << std::endl;
 		return true;
 	}
 

@@ -1,5 +1,6 @@
 #include "src/graphics/window.h"
 #include "src/maths/maths.h"
+#include "src/utils/timer.h"
 #include "src/graphics/shader.h"
 #include "src/graphics/buffers/buffer.h"
 #include "src/graphics/buffers/vertexarray.h"
@@ -8,12 +9,12 @@
 #include "src/graphics/BatchRenderer2D.h"
 #include "src/graphics/static_sprite.h"
 #include "src/graphics/sprite.h"
-#include "src/utils/timer.h"
 #include "src/graphics/layers/tile_layer.h"
 #include "src/graphics/layers/group.h"
 #include "src/graphics/texture.h"
-
+#include "src/graphics/label.h"
 #include <time.h>
+
 
 #include <FreeImage.h>
 
@@ -28,26 +29,40 @@ int main() {
 	Window window("Sparky!!", 800, 600);
 	//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-	std::cout << glGetString(GL_VERSION) << std::endl;
-
 	Shader* s1 = new Shader("src/shader/basic.vert", "src/shader/basic.frag");
 	
 	TileLayer layer1(s1);
 
+	Texture* textures[] =
+	{
+		new Texture("test1.png"),
+		new Texture("test2.png"),
+		new Texture("test3.png")
+	};
 	for (float y = -9.0f; y < 9.0f; y++)
 	{
 		for (float x = -16.0f; x < 16.0f; x++)
 		{
-			layer1.add(new Sprite(x, y, 0.9f, 0.9f, maths::vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+			if (rand() % 4 == 0) 
+				layer1.add(new Sprite(x, y, 0.9f, 0.9f, maths::vec4(rand() % 1000 / 1000.0f, 0, 1, 1)));
+			else
+				layer1.add(new Sprite(x, y, 0.9f, 0.9f, textures[rand() % 3]));
 		}
 	}
 
-	glActiveTexture(GL_TEXTURE0);
-	Texture texture("test.png");
-	texture.bind();
+	Group* g = new Group(maths::mat4::translation(maths::vec3(-15.0f, 7.0f, 0.0f)));
+	Label* fps = new Label("fps", 0.4f, 0.4f, maths::vec4(1, 1, 1, 1));
+	g->add(new Sprite(0, 0, 5, 1.5f, maths::vec4(0.3f, 0.3f, 0.3f, 0.8f)));
+	g->add(fps);
+	layer1.add(g);
+
+	GLint texIDs[] =
+	{
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+	};
 
 	s1->enable();
-	s1->setUniform1i("tex", 0);
+	s1->setUniform1iv("textures", texIDs, 10);
 	s1->setUniformMat4("pr_matrix", maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 
 	Timer time;
@@ -70,11 +85,14 @@ int main() {
 		if (time.elapsed() - timer > 1.0f)
 		{
 			timer += 1.0f;
-			printf("%d fps\n", frames);
+			fps->text = std::to_string(frames) + " fps";
 			frames = 0;
 		}
 	}
-	
+	for (int i = 0; i < 3; i++)
+	{
+		delete textures[i];
+	}
 	return 0;
 }
 #endif

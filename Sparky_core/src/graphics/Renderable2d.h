@@ -7,13 +7,14 @@
 #include "buffers/IndexBuffer.h"
 #include "shader.h"
 #include "Renderer2D.h"
+#include "texture.h"
 
 namespace sparky {	namespace graphics {
 	struct VertexData
 	{
 		maths::vec3 vertex;
 		maths::vec2 uv;
-		unsigned int tid;
+		float tid;
 		unsigned int color;
 	};
 
@@ -24,15 +25,16 @@ namespace sparky {	namespace graphics {
 		maths::vec2 m_Size;
 		maths::vec4 m_Color;
 		std::vector<maths::vec2> m_UV;
-
+		Texture* m_Texture;
 	protected:
 		Renderable2D()
+			:m_Texture(nullptr)
 		{
 			setUVDefaults();
 		}
 	public:
 		Renderable2D(maths::vec3 position, maths::vec2 size, maths::vec4 color)
-			: m_Position(position), m_Size(size), m_Color(color)
+			: m_Position(position), m_Size(size), m_Color(color), m_Texture(nullptr)
 		{
 			setUVDefaults();
 		}
@@ -48,6 +50,11 @@ namespace sparky {	namespace graphics {
 		inline const maths::vec2& getSize() const { return m_Size; }
 		inline const maths::vec4& getColor() const { return m_Color; }
 		inline const std::vector<maths::vec2>& getUV() const { return m_UV; }
+
+		inline const GLuint getTID() const 
+		{
+			return m_Texture ? m_Texture->getID() : 0;
+		}
 	private:
 		void setUVDefaults()
 		{

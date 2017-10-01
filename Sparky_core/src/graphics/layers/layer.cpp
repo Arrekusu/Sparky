@@ -29,6 +29,7 @@ namespace sparky {	namespace graphics {
 		{
 			renderable->submit(m_Renderer);
 		}
+
 		m_Renderer->end();
 		m_Renderer->flush();
 	}

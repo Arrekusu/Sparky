@@ -15,6 +15,7 @@ namespace sparky {  namespace graphics {
 		~Shader();
 
 		void setUniform1f(const GLchar* name, const float value);
+		void setUniform1iv(const GLchar* name, const int* value, int count);
 		void setUniform1i(const GLchar* name, const int value);
 		void setUniform2f(const GLchar* name, const maths::vec2& vector);
 		void setUniform3f(const GLchar* name, const maths::vec3& vector);
