@@ -1,12 +1,11 @@
 #pragma once
 
+#include <cstddef>
+
 #include <deque>
 #include "Renderer2D.h"
 #include "buffers/IndexBuffer.h"
 #include "Renderable2d.h"
-#include <cstddef>
-
-#include "../../ext/freetype-gl/freetype-gl.h"
 
 namespace sparky {	namespace graphics {
 
@@ -30,14 +29,12 @@ namespace sparky {	namespace graphics {
 		VertexData* m_Buffer;
 
 		std::vector<GLuint> m_TextureSlots;
-		ftgl::texture_atlas_t* m_FTAtlas;
-		ftgl::texture_font_t* m_FTFont;
 	public:
 		BatchRenderer2D();
 		~BatchRenderer2D();
 		void begin() override;
 		void submit(const Renderable2D* renderable) override;
-		void drawString(const std::string& text, const maths::vec3& position, const maths::vec4& color) override;
+		void drawString(const std::string& text, const maths::vec3& position, const Font& font, const unsigned int color) override;
 		void end() override;
 		void flush() override;
 	private:

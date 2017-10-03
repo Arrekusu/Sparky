@@ -22,10 +22,15 @@ namespace sparky {  namespace graphics{
 		if (!dib)
 			return nullptr;
 
-		BYTE* result = FreeImage_GetBits(dib);
+		BYTE* pixels = FreeImage_GetBits(dib);
 		*width = FreeImage_GetWidth(dib);
 		*height = FreeImage_GetHeight(dib);
-		
+		int bpp = FreeImage_GetBPP(dib);
+
+		int size = *width * *height * (bpp / 8);
+		BYTE* result = new BYTE[size];
+		memcpy(result, pixels, size);
+
 		return result;
 
 	}

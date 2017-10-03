@@ -19,5 +19,7 @@ namespace sparky {	namespace graphics {
 			m_Renderables.push_back(renderable);
 		}
 		virtual void render();
+
+		inline const std::vector<Renderable2D*>& getRenderables() const { return m_Renderables; }
 	};
 }  }

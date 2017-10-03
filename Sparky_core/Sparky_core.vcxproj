@@ -184,6 +184,8 @@
     <ClCompile Include="src\graphics\buffers\Buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\IndexBuffer.cpp" />
     <ClCompile Include="src\graphics\buffers\VertexArray.cpp" />
+    <ClCompile Include="src\graphics\font.cpp" />
+    <ClCompile Include="src\graphics\font_manager.cpp" />
     <ClCompile Include="src\graphics\label.cpp" />
     <ClCompile Include="src\graphics\layers\group.cpp" />
     <ClCompile Include="src\graphics\layers\layer.cpp" />
@@ -213,10 +215,12 @@
     <ClInclude Include="ext\freetype\include\config\ftoption.h" />
     <ClInclude Include="ext\freetype\include\config\ftstdlib.h" />
     <ClInclude Include="ext\freetype\include\ft2build.h" />
+    <ClInclude Include="src\graphics\font.h" />
     <ClInclude Include="src\graphics\BatchRenderer2D.h" />
     <ClInclude Include="src\graphics\buffers\Buffer.h" />
     <ClInclude Include="src\graphics\buffers\IndexBuffer.h" />
     <ClInclude Include="src\graphics\buffers\VertexArray.h" />
+    <ClInclude Include="src\graphics\font_manager.h" />
     <ClInclude Include="src\graphics\label.h" />
     <ClInclude Include="src\utils\ImageLoad.h" />
     <ClInclude Include="src\graphics\layers\group.h" />

@@ -1,5 +1,5 @@
 #include "BatchRenderer2D.h"
-
+#include "../../ext/freetype-gl/freetype-gl.h"
 
 namespace sparky {	namespace graphics {
 	BatchRenderer2D::BatchRenderer2D()
@@ -23,7 +23,7 @@ namespace sparky {	namespace graphics {
 	{
 		const maths::vec3& position = renderable->getPosition();
 		const maths::vec2& size = renderable->getSize();
-		const maths::vec4& color = renderable->getColor();
+		const unsigned int color = renderable->getColor();
 		const std::vector<maths::vec2> uv = renderable->getUV();
 		const GLuint tid = renderable->getTID();
 
@@ -54,55 +54,43 @@ namespace sparky {	namespace graphics {
 				ts = (float) (m_TextureSlots.size() - 1);
 			}
 		}
-		int r = color.x * 255.0f;
-		int g = color.y * 255.0f;
-		int b = color.z * 255.0f;
-		int a = color.w * 255.0f;
-
-		c = a << 24 | b << 16 | g << 8 | r;
 		
 		m_Buffer->vertex = *m_TransformationBack * position;
 		m_Buffer->uv = uv[0];
 		m_Buffer->tid = ts;
-		m_Buffer->color = c;
+		m_Buffer->color = color;
 		m_Buffer++;
 
 		m_Buffer->vertex = *m_TransformationBack * maths::vec3(position.x, position.y + size.y, position.z);
 		m_Buffer->uv = uv[1];
 		m_Buffer->tid = ts;
-		m_Buffer->color = c;
+		m_Buffer->color = color;
 		m_Buffer++;
 
 		m_Buffer->vertex = *m_TransformationBack * maths::vec3(position.x + size.x, position.y + size.y, position.z);
 		m_Buffer->uv = uv[2];
 		m_Buffer->tid = ts;
-		m_Buffer->color = c;
+		m_Buffer->color = color;
 		m_Buffer++;
 
 		m_Buffer->vertex = *m_TransformationBack * maths::vec3(position.x + size.x, position.y, position.z);
 		m_Buffer->uv = uv[3];
 		m_Buffer->tid = ts;
-		m_Buffer->color = c;
+		m_Buffer->color = color;
 		m_Buffer++;
 
 		m_IndexCount += 6;
 	}
-	void BatchRenderer2D::drawString(const std::string & text, const maths::vec3& position, const maths::vec4 & color)
+	void BatchRenderer2D::drawString(const std::string & text, const maths::vec3& position, const Font& font, unsigned int color)
 	{
 		using namespace ftgl;
 
-		int r = color.x * 255.0f;
-		int g = color.y * 255.0f;
-		int b = color.z * 255.0f;
-		int a = color.w * 255.0f;
-
-		unsigned int col = a << 24 | b << 16 | g << 8 | r;
-
+		unsigned int col = color;
 		float ts = 0.0f;
 		bool found = false;
 		for (int i = 0; i < m_TextureSlots.size(); i++)
 		{
-			if (m_TextureSlots[i] == m_FTAtlas->id)
+			if (m_TextureSlots[i] == font.getId())
 			{
 				ts = (float)i + 1;
 				found = true;
@@ -118,7 +106,7 @@ namespace sparky {	namespace graphics {
 				flush();
 				begin();
 			}
-			m_TextureSlots.push_back(m_FTAtlas->id);
+			m_TextureSlots.push_back(font.getId());
 			ts = (float)(m_TextureSlots.size() - 1);
 		}
 
@@ -127,10 +115,12 @@ namespace sparky {	namespace graphics {
 
 		float x = position.x;
 
+		texture_font_t* ftFont = font.getFTGLFont();
+
 		for (int i = 0; i < text.length(); i++)
 		{
 			char c = text.at(i);
-			texture_glyph_t* glyph = texture_font_get_glyph(m_FTFont, c);
+			texture_glyph_t* glyph = texture_font_get_glyph(ftFont, c);
 			if (glyph != nullptr) 
 			{
 				if (i > 0)
@@ -240,8 +230,7 @@ namespace sparky {	namespace graphics {
 
 		glBindVertexArray(0);
 
-		m_FTAtlas = ftgl::texture_atlas_new(512, 512, 2);
-		m_FTFont = ftgl::texture_font_new_from_file(m_FTAtlas, 30, "SourceSansPro-Light.ttf");
+		
 	}
 
 }  }

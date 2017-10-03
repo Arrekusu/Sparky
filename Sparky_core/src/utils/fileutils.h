@@ -1,7 +1,7 @@
 #pragma once
-#include <string>
 
 namespace sparky {
+
 	std::string read_file(const char* filePath)
 	{
 		FILE* file = fopen(filePath, "rt");
