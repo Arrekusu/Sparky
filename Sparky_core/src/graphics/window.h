@@ -4,6 +4,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "font_manager.h"
+#include "../audio/sound_manager.h"
 
 #define MAX_KEYS 1024
 #define MAX_BUTTONS 32

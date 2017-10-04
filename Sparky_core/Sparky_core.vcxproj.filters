@@ -55,6 +55,12 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{86c1b0d6-11bf-498c-bc79-284ea242347c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ext\gorilla-audio">
+      <UniqueIdentifier>{1a81ddd9-c2de-4128-be56-e9ed0d75beb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ext\gorilla-audio">
+      <UniqueIdentifier>{476d348a-76b4-4dfd-a1f2-037b4d242d5e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -249,6 +255,30 @@
     <ClCompile Include="src\graphics\font_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ext\gorilla-audio\common\gc_common.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\gorilla-audio\common\gc_thread.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\gorilla-audio\devices\ga_openal.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\gorilla-audio\ga.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\gorilla-audio\ga_stream.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ext\gorilla-audio\gau.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\audio\sound.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\audio\sound_manager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphics\BatchRenderer2D.h">
@@ -369,6 +399,57 @@
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="src\graphics\font_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\ga.h">
+      <Filter>Header Files\ext\gorilla-audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\ga_internal.h">
+      <Filter>Header Files\ext\gorilla-audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\devices\ga_openal.h">
+      <Filter>Header Files\ext\gorilla-audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\devices\ga_xaudio2.h">
+      <Filter>Header Files\ext\gorilla-audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\gau.h">
+      <Filter>Header Files\ext\gorilla-audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\common\gc_common.h">
+      <Filter>Header Files\ext\gorilla-audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\common\gc_thread.h">
+      <Filter>Header Files\ext\gorilla-audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\common\gc_types.h">
+      <Filter>Header Files\ext\gorilla-audio</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\gorilla\common\gc_common.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\gorilla\common\gc_thread.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\gorilla\common\gc_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\gorilla\devices\ga_openal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\gorilla\ga.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\gorilla\ga_internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ext\gorilla-audio\gorilla\gau.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\audio\sound_manager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\audio\sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

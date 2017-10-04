@@ -12,6 +12,7 @@ namespace sparky {	namespace graphics {
 		}
 
 		FontManager::add(new Font("SourceSans", "SourceSansPro-Light.ttf", 32));
+		audio::SoundManager::init();
 
 		for (int i = 0; i < MAX_KEYS; i++) {
 			m_Keys[i] = false;
@@ -28,6 +29,7 @@ namespace sparky {	namespace graphics {
 	Window::~Window() 
 	{
 		FontManager::clean();
+		audio::SoundManager::clean();
 		glfwTerminate();
 	}
 

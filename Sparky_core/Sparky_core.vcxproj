@@ -70,16 +70,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(ProjectDir)ext\freetype\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(ProjectDir)ext\freetype\include;$(SolutionDir)Dependencies\OpenAL\include;$(SolutionDir)Dependencies\libvorbis\include;$(SolutionDir)Dependencies\libogg\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(SolutionDir)Dependencies\OpenAL\libs\Win32;$(SolutionDir)Dependencies\libvorbis\bin;$(SolutionDir)Dependencies\libogg\bin;$(LibraryPath)</LibraryPath>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)bin\$(Configuration)\Intermediates\</IntDir>
-    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(ProjectDir)ext\freetype\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\FreeImage\include;$(ProjectDir)ext\freetype\include;$(SolutionDir)Dependencies\OpenAL\include;$(SolutionDir)Dependencies\libvorbis\include;$(SolutionDir)Dependencies\libogg\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Dependencies\GLFW\lib-vc2015;$(SolutionDir)Dependencies\GLEW\lib;$(SolutionDir)Dependencies\FreeImage\lib;$(SolutionDir)Dependencies\OpenAL\libs\Win32;$(SolutionDir)Dependencies\libvorbis\bin;$(SolutionDir)Dependencies\libogg\bin;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -90,7 +90,7 @@
       <BasicRuntimeChecks>UninitializedLocalUsageCheck</BasicRuntimeChecks>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;FreeImage.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;FreeImage.lib;glew32s.lib;OpenAL32.lib;libvorbis.lib;libogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -117,7 +117,7 @@
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;FreeImage.lib;glew32s.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;FreeImage.lib;glew32s.lib;OpenAL32.lib;libvorbis.lib;libogg.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <Profile>true</Profile>
     </Link>
   </ItemDefinitionGroup>
@@ -179,7 +179,15 @@
     <ClCompile Include="ext\freetype\src\type1\type1.c" />
     <ClCompile Include="ext\freetype\src\type42\type42.c" />
     <ClCompile Include="ext\freetype\src\winfonts\winfnt.c" />
+    <ClCompile Include="ext\gorilla-audio\common\gc_common.c" />
+    <ClCompile Include="ext\gorilla-audio\common\gc_thread.c" />
+    <ClCompile Include="ext\gorilla-audio\devices\ga_openal.c" />
+    <ClCompile Include="ext\gorilla-audio\ga.c" />
+    <ClCompile Include="ext\gorilla-audio\gau.c" />
+    <ClCompile Include="ext\gorilla-audio\ga_stream.c" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\audio\sound.cpp" />
+    <ClCompile Include="src\audio\sound_manager.cpp" />
     <ClCompile Include="src\graphics\BatchRenderer2D.cpp" />
     <ClCompile Include="src\graphics\buffers\Buffer.cpp" />
     <ClCompile Include="src\graphics\buffers\IndexBuffer.cpp" />
@@ -215,6 +223,23 @@
     <ClInclude Include="ext\freetype\include\config\ftoption.h" />
     <ClInclude Include="ext\freetype\include\config\ftstdlib.h" />
     <ClInclude Include="ext\freetype\include\ft2build.h" />
+    <ClInclude Include="ext\gorilla-audio\gorilla\common\gc_common.h" />
+    <ClInclude Include="ext\gorilla-audio\gorilla\common\gc_thread.h" />
+    <ClInclude Include="ext\gorilla-audio\gorilla\common\gc_types.h" />
+    <ClInclude Include="ext\gorilla-audio\gorilla\devices\ga_openal.h" />
+    <ClInclude Include="ext\gorilla-audio\gorilla\ga.h" />
+    <ClInclude Include="ext\gorilla-audio\gorilla\gau.h" />
+    <ClInclude Include="ext\gorilla-audio\gorilla\ga_internal.h" />
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\common\gc_common.h" />
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\common\gc_thread.h" />
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\common\gc_types.h" />
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\devices\ga_openal.h" />
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\devices\ga_xaudio2.h" />
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\ga.h" />
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\gau.h" />
+    <ClInclude Include="ext\gorilla-audio\include\gorilla\ga_internal.h" />
+    <ClInclude Include="src\audio\sound.h" />
+    <ClInclude Include="src\audio\sound_manager.h" />
     <ClInclude Include="src\graphics\font.h" />
     <ClInclude Include="src\graphics\BatchRenderer2D.h" />
     <ClInclude Include="src\graphics\buffers\Buffer.h" />

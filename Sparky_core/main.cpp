@@ -14,8 +14,10 @@
 #include "src/graphics/texture.h"
 #include "src/graphics/label.h"
 #include "src/graphics/font_manager.h"
+#include "src/audio/sound_manager.h"
 
-
+#include "ext/gorilla-audio/gorilla/ga.h"
+#include "ext/gorilla-audio/gorilla/gau.h"
 #include <FreeImage.h>
 
 #if 1
@@ -23,6 +25,7 @@ int main() {
 	using namespace sparky;
 	using namespace graphics;
 	using namespace maths;
+	using namespace audio;
 
 	Window window("Sparky!!", 800, 600);
 	//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
@@ -65,10 +68,15 @@ int main() {
 	s1->setUniform1iv("textures", texIDs, 10);
 	s1->setUniformMat4("pr_matrix", maths::mat4::orthographic(-16.0f, 16.0f, -9.0f, 9.0f, -1.0f, 1.0f));
 
+	SoundManager::add(new Sound("Test", "Test.wav"));
+	SoundManager::get("Test")->play();
+
 	Timer time;
 	float timer = 0;
 	unsigned int frames = 0;
 	float t = 0.0f;
+	float gain = 0.5f;
+	SoundManager::get("Test")->setGain(gain);
 	while (!window.closed())
 	{
 		t += 0.01f;
@@ -88,6 +96,22 @@ int main() {
 			rs[i]->setColor(maths::vec4(c, 0, 1, 1));
 		}
 		
+		if (window.isKeyTyped(GLFW_KEY_P)) 
+			SoundManager::get("Test")->play();
+
+		if (window.isKeyTyped(GLFW_KEY_UP))
+		{
+			gain += 0.05f;
+			SoundManager::get("Test")->setGain(gain);
+		}
+
+		if (window.isKeyTyped(GLFW_KEY_DOWN))
+		{
+			gain -= 0.05f;
+			SoundManager::get("Test")->setGain(gain);
+		}
+		
+		SoundManager::update();
 		window.update();
 
 		frames++;
