@@ -1,23 +1,20 @@
+#if 0
 #include "src/graphics/window.h"
 #include "src/maths/maths.h"
 #include "src/utils/timer.h"
+
 #include "src/graphics/shader.h"
 #include "src/graphics/buffers/buffer.h"
 #include "src/graphics/buffers/vertexarray.h"
 #include "src/graphics/buffers/indexbuffer.h"
-#include "src/graphics/Simple2dRenderer.h"
 #include "src/graphics/BatchRenderer2D.h"
-#include "src/graphics/static_sprite.h"
 #include "src/graphics/sprite.h"
-#include "src/graphics/layers/tile_layer.h"
+#include "tile_layer.h"
 #include "src/graphics/layers/group.h"
 #include "src/graphics/texture.h"
 #include "src/graphics/label.h"
 #include "src/graphics/font_manager.h"
 #include "src/audio/sound_manager.h"
-
-#include "ext/gorilla-audio/gorilla/ga.h"
-#include "ext/gorilla-audio/gorilla/gau.h"
 #include <FreeImage.h>
 
 #if 1
@@ -99,6 +96,18 @@ int main() {
 		if (window.isKeyTyped(GLFW_KEY_P)) 
 			SoundManager::get("Test")->play();
 
+		if (window.isKeyTyped(GLFW_KEY_1))
+			SoundManager::get("Test")->pause();
+
+		if (window.isKeyTyped(GLFW_KEY_2))
+			SoundManager::get("Test")->resume();
+
+		if (window.isKeyTyped(GLFW_KEY_L))
+			SoundManager::get("Test")->loop();
+
+		if (window.isKeyTyped(GLFW_KEY_S))
+			SoundManager::get("Test")->stop();
+
 		if (window.isKeyTyped(GLFW_KEY_UP))
 		{
 			gain += 0.05f;
@@ -110,8 +119,7 @@ int main() {
 			gain -= 0.05f;
 			SoundManager::get("Test")->setGain(gain);
 		}
-		
-		SoundManager::update();
+				
 		window.update();
 
 		frames++;
@@ -129,4 +137,5 @@ int main() {
 
 	return 0;
 }
+#endif
 #endif

@@ -22,6 +22,7 @@ namespace sparky { namespace audio {
 		void play();
 		void loop();
 		void pause();
+		void resume();
 		void stop();
 
 		void setGain(float gain);

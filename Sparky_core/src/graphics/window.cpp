@@ -128,6 +128,8 @@ namespace sparky {	namespace graphics {
 		}
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
+
+		audio::SoundManager::update();
 	}
 
 	bool Window::closed() const
